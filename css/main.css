@@ -1,12 +1,12 @@
 :root {
-  --body-bg-color: #eee;
-  --content-bg-color: #fff;
+  --body-bg-color: #fff5f7;
+  --content-bg-color: rgba(255,255,255,0.9);
   --card-bg-color: #f5f5f5;
   --text-color: #555;
   --blockquote-color: #666;
-  --link-color: #555;
-  --link-hover-color: #222;
-  --brand-color: #fff;
+  --link-color: #ff6b81;
+  --link-hover-color: #ff8da1;
+  --brand-color: #ff6b81;
   --brand-hover-color: #fff;
   --table-row-odd-bg-color: #f9f9f9;
   --table-row-hover-bg-color: #f5f5f5;
@@ -1107,7 +1107,6 @@ pre .javascript .function {
 .sidebar {
   background: #222;
   bottom: 0;
-  box-shadow: inset 0 2px 6px #000;
   position: fixed;
   top: 0;
 }
@@ -1175,7 +1174,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff49ff;
+  background: #145906;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1418,9 +1417,10 @@ pre .javascript .function {
   width: 100%;
 }
 .with-love {
-  color: #ff0000;
+  color: #ffb6c1;
   display: inline-block;
   margin: 0 5px;
+  animation: iconAnimate 1.33s ease-in-out infinite;
 }
 .powered-by,
 .theme-info {
@@ -1490,33 +1490,26 @@ pre .javascript .function {
   transition-timing-function: ease-in-out;
 }
 .back-to-top {
-  background: #222;
-  bottom: -100px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  left: 30px;
-  opacity: 0.6;
-  padding: 0 6px;
-  position: fixed;
-  transition-property: bottom;
-  z-index: 1300;
-  width: 24px;
-}
-.back-to-top span {
-  display: none;
-}
-.back-to-top:hover {
-  color: #fc6423;
+  background: transparent;
+  margin: 8px -10px -20px;
+  opacity: 0;
 }
 .back-to-top.back-to-top-on {
-  bottom: 30px;
+  cursor: pointer;
+  opacity: 0.6;
 }
-@media (max-width: 991px) {
-  .back-to-top {
-    left: 20px;
-    opacity: 0.8;
-  }
+.back-to-top.back-to-top-on:hover {
+  opacity: 0.8;
+}
+.reading-progress-bar {
+  background: #FFB6C1;
+  display: block;
+  height: 3px;
+  left: 0;
+  position: fixed;
+  width: 0;
+  z-index: 1500;
+  top: 0;
 }
 .post-body {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -2148,6 +2141,106 @@ ul.breadcrumb li + li:last-child {
 .tag-cloud a:hover {
   color: var(--link-hover-color) !important;
 }
+.search-pop-overlay {
+  background: rgba(0,0,0,0);
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  transition: visibility 0s linear 0.2s, background 0.2s;
+  visibility: hidden;
+  width: 100%;
+  z-index: 1400;
+}
+.search-pop-overlay.search-active {
+  background: rgba(0,0,0,0.3);
+  transition: background 0.2s;
+  visibility: visible;
+}
+.search-popup {
+  background: var(--card-bg-color);
+  border-radius: 5px;
+  height: 80%;
+  left: calc(50% - 350px);
+  position: fixed;
+  top: 10%;
+  transform: scale(0);
+  transition: transform 0.2s;
+  width: 700px;
+  z-index: 1500;
+}
+.search-active .search-popup {
+  transform: scale(1);
+}
+@media (max-width: 767px) {
+  .search-popup {
+    border-radius: 0;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+.search-popup .search-icon,
+.search-popup .popup-btn-close {
+  color: #999;
+  font-size: 18px;
+  padding: 0 10px;
+}
+.search-popup .popup-btn-close {
+  cursor: pointer;
+}
+.search-popup .popup-btn-close:hover .fa {
+  color: #222;
+}
+.search-popup .search-header {
+  background: #eee;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  padding: 5px;
+}
+.search-popup input.search-input {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  width: 100%;
+}
+.search-popup input.search-input::-webkit-search-cancel-button {
+  display: none;
+}
+.search-popup .search-input-container {
+  flex-grow: 1;
+  padding: 2px;
+}
+.search-popup ul.search-result-list {
+  margin: 0 5px;
+  padding: 0;
+  width: 100%;
+}
+.search-popup p.search-result {
+  border-bottom: 1px dashed #ccc;
+  padding: 5px 0;
+}
+.search-popup a.search-result-title {
+  font-weight: bold;
+}
+.search-popup .search-keyword {
+  border-bottom: 1px dashed #ff2a2a;
+  color: #ff2a2a;
+  font-weight: bold;
+}
+.search-popup #search-result {
+  display: flex;
+  height: calc(100% - 55px);
+  overflow: auto;
+  padding: 5px 25px;
+}
+.search-popup #no-result {
+  color: #ccc;
+  margin: auto;
+}
 .header {
   margin: 0 auto;
   position: relative;
@@ -2446,6 +2539,13 @@ ul.breadcrumb li + li:last-child {
 .links-of-blogroll-item {
   padding: 0;
 }
+.back-to-top {
+  background: var(--body-bg-color);
+  margin: -4px -10px -18px;
+}
+.back-to-top.back-to-top-on {
+  margin-top: 16px;
+}
 .content-wrap {
   background: initial;
   box-shadow: initial;
@@ -2518,10 +2618,10 @@ ul.breadcrumb li + li:last-child {
 }
 .post-body h1,
 .post-body h2 {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #fff5f7;
 }
 .post-body h3 {
-  border-bottom: 1px dotted #eee;
+  border-bottom: 1px dotted #fff5f7;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .content-wrap {
@@ -2569,4 +2669,99 @@ ul.breadcrumb li + li:last-child {
   .pagination {
     margin: 8px 0 0;
   }
+}
+/* 1. 给侧边栏和文章卡片添加柔和阴影，增加悬浮感 */
+.sidebar,
+.post-block {
+  box-shadow: 0 10px 30px rgba(255,182,193,0.2);
+  border-radius: 15px !important; /* 圆角化设计更显亲和力 */
+}
+/* 2. 侧边栏头像：增加粉色呼吸灯效果 */
+.site-author-image {
+  border: 3px solid #ffd1dc;
+  padding: 2px;
+  box-shadow: 0 0 15px rgba(255,141,161,0.3);
+  transition: all 0.5s;
+}
+.site-author-image:hover {
+  box-shadow: 0 0 25px rgba(255,141,161,0.6);
+  transform: rotate(360deg);
+}
+/* 3. 菜单项：鼠标悬停时的胶囊式背景 */
+.menu-item a:hover {
+  background: #fff0f5 !important;
+  color: #ff6b81 !important;
+  border-radius: 20px;
+}
+/* 4. 文章标题下的粉色装饰线 */
+.posts-expand .post-title-link::after {
+  background-color: #ff8da1 !important;
+}
+/* 5. 滚动条美化：细长的粉色丝绸感 */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: #ffd1dc;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff8da1;
+}
+/* --- 修改左侧顶部品牌栏背景 --- */
+.site-brand-container {
+  background: #ff8da1 !important; /* 换成你喜欢的亮粉色 */
+  background-image: linear-gradient(135deg, #ffb6c1 0%, #ffb6c1 100%); /* 增加一点渐变设计感 */
+  padding: 20px 0 !important;
+}
+/* 如果你还想微调里面“猪猪”这两个字的大小或阴影 */
+.site-title {
+  color: #fff !important; /* 标题文字设为白色在粉色背景上更清晰 */
+  font-size: 24px !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* 淡淡的阴影增加质感 */
+}
+/* 副标题颜色（如果你有设置的话） */
+.site-subtitle {
+  color: #fff5f7 !important;
+}
+.headband {
+  background: #ffb6c1; /* 把它变成浅粉色或设为 none */
+  height: 3px;
+}
+/* 搜索弹出框美化 */
+.search-popup {
+  border-radius: 20px !important;
+  background: rgba(255,255,255,0.95) !important;
+}
+/* 搜索框输入部分 */
+.search-input {
+  border-bottom: 2px solid #ffb6c1 !important;
+  color: #ff6b81 !important;
+}
+.back-to-top {
+  color: #ff8da1 !important; /* 亮粉色 */
+  font-size: 14px;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+.back-to-top:hover {
+  color: #ff6b81 !important; /* 悬停时颜色加深 */
+}
+/* 给顶部进度条增加淡淡的粉色荧光效果 */
+.reading-progress-bar {
+  box-shadow: 0 0 8px rgba(255,182,193,0.7);
+  border-radius: 0 2px 2px 0;
+}
+/* --- 纯白字体 + 粉色霓虹描边 --- */
+.site-title {
+/* 1. 字体设置：建议用微软雅黑加粗，受光面积大，更清楚 */
+  font-family: "Microsoft YaHei", "SimHei", sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 30px !important;
+/* 2. 主体颜色改为纯白 */
+  color: #fff !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  animation: none !important;
 }
