@@ -1174,7 +1174,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #145906;
+  background: #a8ebda;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2764,4 +2764,17 @@ ul.breadcrumb li + li:last-child {
   -webkit-background-clip: initial !important;
   background-clip: initial !important;
   animation: none !important;
+/* --- 强制在手机端显示头像 --- */
+}
+@media (max-width: 767px) {
+  .site-title .site-author-image {
+    display: block !important;
+    margin: 10px auto !important;
+/* 保持你喜欢的粉色圆框 */
+    border: 2px solid #ffd1dc !important;
+    visibility: visible !important;
+  }
+  .site-title .sidebar-inner {
+    display: block !important;
+  }
 }

@@ -15,6 +15,7 @@
 
 <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
+
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
@@ -195,13 +196,33 @@
   <div class="post-block">
     <div class="posts-collapse">
       <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 2 篇日志。 继续努力。</span>
+        <span class="collection-header">嗯..! 目前共计 3 篇日志。 继续努力。</span>
       </div>
 
       
     <div class="collection-year">
       <span class="collection-header">2026</span>
     </div>
+
+  <article itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <div class="post-meta">
+        <time itemprop="dateCreated"
+              datetime="2026-05-01T00:00:00+08:00"
+              content="2026-05-01">
+          05-01
+        </time>
+      </div>
+
+      <div class="post-title">
+          <a class="post-title-link" href="/2026/05/01/test/" itemprop="url">
+            <span itemprop="name">测试公式</span>
+          </a>
+      </div>
+
+    </header>
+  </article>
 
   <article itemscope itemtype="http://schema.org/Article">
     <header class="post-header">
@@ -316,7 +337,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -363,6 +384,7 @@
   <span class="author" itemprop="copyrightHolder">Piglin's Garden</span>
 </div>
 
+
         
 
 
@@ -377,7 +399,6 @@
   </div>
 
   
-  <script color='255,182,193' opacity='0.6' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
   <script src="/lib/anime.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
@@ -419,5 +440,65 @@
 
   
 
-</body>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+
+<style>
+/* 1. 核心颜色：全量粉色覆盖 */
+.katex, .katex * { 
+    color: #FF69B4 !important; 
+    border-color: #FF69B4 !important; 
+}
+
+/* 2. 布局修正：解决 Hexo/NexT 等主题导致的样式冲突 */
+.katex .katex-html { 
+    display: inline-block !important; /* 整体容器 */
+    white-space: nowrap !important;
+    line-height: 1.2 !important;     /* 恢复官方标准行高 */
+}
+
+/* 3. 垂直对齐核心：修复上标 (²)、下标、求和号 (Σ) 位移 */
+/* 核心：严禁对 vlist-t 和 vlist 乱用 inline-block，保持原有的 table 属性 */
+.katex .vlist-t { display: inline-table !important; }
+.katex .vlist-r { display: table-row !important; }
+.katex .vlist { display: table-cell !important; }
+
+/* 4. 求和符号 (LargeOps) 专项优化 */
+.katex .mop { 
+    margin: 0 0.2em !important;      /* 解决你提到的“左右太挤” */
+    vertical-align: 0em !important; 
+}
+
+/* 5. 间距微调：防止公式内的各种占位符 (mspace) 被主题压缩 */
+.katex .mspace { display: inline-block !important; }
+
+/* 6. 修正根号等符号的线条位置 */
+.katex .root { vertical-align: middle !important; }
+
+/* 针对积分号 (∫) 的专项间距优化 */
+.katex .mop.op-symbol {
+    margin-right: 0.35em !important; /* 拉开积分号与后面变量 (dx) 的距离 */
+    margin-left: 0.25em !important;  /* 拉开积分号与前面符号的距离 */
+}
+
+/* 如果是带上下限的积分，确保上下限不挤压 */
+.katex .vlist-t.vlist-t2 {
+    margin-right: 0.15em !important;
+}
+
+/* 解决积分符号与其内容之间的微小重叠 */
+.katex .mord + .mop.op-symbol, 
+.katex .mbin + .mop.op-symbol {
+    margin-left: 0.4em !important;
+}
+
+/* 额外修正：确保积分的长符号在粉色下线条不打断 */
+.katex .stretchy {
+    display: block !important;
+}
+
+</style>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/koharu.model.json"},"display":{"position":"right","width":150,"height":300,"hOffset":20,"vOffset":-20},"mobile":{"show":true},"react":{"opacity":0.9},"log":false});</script></body>
 </html>
